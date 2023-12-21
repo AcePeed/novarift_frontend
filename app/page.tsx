@@ -5,7 +5,6 @@ import { useEffect } from 'react'
 
 export default async function Home() {
   var result = await UserCheck()
-  console.log(await result)
   if((!(typeof result.auth!='undefined' && result.auth==true))){
     redirect(`${process.env.FRONT_HOST}/login`)
   }

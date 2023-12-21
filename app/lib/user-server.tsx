@@ -11,7 +11,8 @@ export async function check(){
         cookieStr+=elem.name+"="+elem.value+";"
     })
     const result = await fetch(`${process.env.API_HOST}/user`,{
-        cache:'no-store',
+        //cache:'no-store',
+        next: { revalidate: 10 },
         credentials: 'include',
         headers: {"Content-Type": "application/json", "Cookie":cookieStr},
     })
@@ -21,7 +22,7 @@ export async function check(){
 
 export async function login(login:string,password:string) {
     const result = await fetch(`${process.env.API_HOST}/user`,{
-        cache:'no-store',
+        cache: 'no-store',
         method: 'POST',
         credentials: 'include',
         headers: {"Content-Type": "application/json"},

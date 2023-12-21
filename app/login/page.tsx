@@ -1,9 +1,11 @@
 'use client'
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import '../css/login.css'
 import { redirect } from 'next/navigation'
 import { login as UserLogIn } from '@/app/lib/user'
 import Link from "next/link"
+import { register as UserRegister } from '@/app/lib/user'
+import { check as UserCheck } from '@/app/lib/user'
 
 
 export default function Loading(props: any){
@@ -25,6 +27,14 @@ export default function Loading(props: any){
             }
         })
     }
+
+    useEffect(()=>{
+        UserCheck().then(result=>{
+            if(((typeof result.auth!='undefined' && result.auth==true))){
+                window.location.href = `${process.env.FRONT_HOST}/catalog`
+            }
+        })       
+    },[])
 
     return <>
         <div className="login-container">
