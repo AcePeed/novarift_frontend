@@ -19,10 +19,12 @@ export default function Loading(props: any){
             setError((previous)=>{
                 previous = {server: false, fname: false, lname:false, email: false, login: false, password:false}
                 try{
-                    res.error.forEach((element:{field: string | null}) => {
-                    if(element.field=='email'){previous['email'] = true}
-                    if(element.field=='password'){previous['password'] = true}
-                    });
+                    if(res.auth!==true){
+                        res.error.forEach((element:{field: string | null}) => {
+                            if(element.field=='email'){previous['email'] = true}
+                            if(element.field=='password'){previous['password'] = true}
+                            });
+                    }
                 }
                 catch(e){previous.server=true}
                 return previous

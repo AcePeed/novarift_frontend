@@ -19,14 +19,16 @@ export default function Loading(props: any){
             setError((previous)=>{
                 previous = {server: false, fname: false, lname:false, email: false, login: false, password: false, password_confirmation: false}
                 try{
-                    res.error.forEach((element:{field: string | null}) => {
-                        if(element.field=='fname'){previous['fname'] = true}
-                        if(element.field=='lname'){previous['lname'] = true}
-                        if(element.field=='email'){previous['email'] = true}
-                        if(element.field=='login'){previous['login'] = true}
-                        if(element.field=='password'){previous['password'] = true}
-                        if(element.field=='password_confirmation'){previous['password_confirmation'] = true}
-                    });
+                    if(res.auth!==true){
+                        res.error.forEach((element:{field: string | null}) => {
+                            if(element.field=='fname'){previous['fname'] = true}
+                            if(element.field=='lname'){previous['lname'] = true}
+                            if(element.field=='email'){previous['email'] = true}
+                            if(element.field=='login'){previous['login'] = true}
+                            if(element.field=='password'){previous['password'] = true}
+                            if(element.field=='password_confirmation'){previous['password_confirmation'] = true}
+                        });
+                    }
                 }
                 catch(e){previous.server=true}
                 return previous
