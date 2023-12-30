@@ -24,7 +24,7 @@ export async function login(login:string,password:string) {
 }
 
 
-export async function register(cred:{fname:string | null,lname:string | null,email:string | null,password:string | null,login:string | null}) {
+export async function register(cred:{fname:string | null,lname:string | null,email:string | null,password:string | null,login:string | null,password_confirmation:string | null}) {
     console.log({
         fname: cred.fname,
         lname: cred.lname,
@@ -32,9 +32,9 @@ export async function register(cred:{fname:string | null,lname:string | null,ema
         login: cred.login,
         password: cred.password,
     })
-    const result = await fetch(`${process.env.API_HOST}/user/register`,{
+    const result = await fetch(`${process.env.API_HOST}/user`,{
         cache:'no-store',
-        method: 'POST',
+        method: 'PUT',
         credentials: 'include',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
@@ -43,6 +43,7 @@ export async function register(cred:{fname:string | null,lname:string | null,ema
             email: cred.email,
             login: cred.login,
             password: cred.password,
+            password_confirmation: cred.password_confirmation,
         })
     })
     return await result.json()

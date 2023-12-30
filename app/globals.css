@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:ital,wght@0,400;0,600;1,400&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:ital,wght@0,400;0,600;1,400&display=swap');
+*/
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root{
     --background : #111112;
+    --backgroundClear : hsl(240, 3%, 13%);
     --accentColor: #8458B3;
     --clearColor: #A0D2EB;
     --fontColor: #ded7e3;
+    --errorColor : red
 }
 *{
     color: var(--fontColor);
@@ -16,10 +20,10 @@ body{
     bottom: 0;
     right: 0;
     left: 0;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: column;
     color: var(--fontColor);
-    font-family: 'Monserrat', sans-serif;
+    font-family: 'Lato', sans-serif;
 }
 textarea:focus, input:focus{
     outline: none;
@@ -31,4 +35,8 @@ textarea:focus, input:focus{
 
 a{
     text-decoration: none;
+}
+
+header{
+    height: 40px;
 }

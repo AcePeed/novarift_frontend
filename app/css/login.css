@@ -1,20 +1,29 @@
+body{
+    justify-content: center;
+    align-items: center;
+}
+
 .login-title{
     width: 100%;
     display: flex;
     justify-content: center;
-    font-size: 60px;
+    font-size: min( 60px , 16vw );
     margin-bottom: 15px;
 }
 .login-container input{
     background: none;
     display: block;
-    width: 300px;
+    width: min( 300px , 95vw);
     padding: 5px;
     margin-bottom: 5px;
     font-size: 1em;
     transition: 0.3s;
     border-bottom: solid 1px grey;
 }
+.input_error{
+    border-bottom: solid 1px red!important;
+}
+
 .login-container input:focus{
     font-size: 1.02em;
     border-bottom: solid 1px var(--fontColor);
@@ -35,6 +44,9 @@
 }
 .form_button:active{
     filter: brightness(120%);
+}
+.login_register_button_error{
+    background-color: var(--errorColor);
 }
 .login_register{
     display: inline-block;
