@@ -17,7 +17,7 @@ export async function check(){
         headers: {"Content-Type": "application/json", "Cookie":cookieStr},
     })
 
-    return result.json()
+    return await result.json()
 }
 
 export async function login(login:string,password:string) {

@@ -11,6 +11,11 @@ const nextConfig = {
               hostname: 'localhost',
               //port: '',
               //pathname: '/image/upload/**',
+            },{
+              //protocol: 'https',
+              hostname: '192.168.11.200',
+              //port: '',
+              //pathname: '/image/upload/**',
             },
           ],
     }
