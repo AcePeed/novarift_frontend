@@ -17,3 +17,21 @@ export async function getCatalog(){
 
     return result.json()
 }
+
+export async function getTitle(id: any){
+    const cookieStore = cookies()
+    const session_cookies = cookieStore.getAll()
+    var cookieStr : string = ''
+    session_cookies.forEach(elem=>{
+        cookieStr+=elem.name+"="+elem.value+";"
+    })
+    const result = await fetch(`${process.env.API_HOST}/catalog/${id}`,{
+        //cache:'no-store',
+        next: { revalidate: 30 },
+        credentials: 'include',
+        headers: {"Content-Type": "application/json", "Cookie":cookieStr},
+    })
+
+    return result.json()
+}
+

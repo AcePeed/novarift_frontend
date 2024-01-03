@@ -10,7 +10,7 @@ export default async function CatalogLayout({
 }: {
   children: React.ReactNode;
 }) {
-  let data: Array<{ name: string; img: string }> = [];
+  let data: Array<{ name: string; img: string; id: string }> = [];
   try {
     const dataParent = await getCatalog();
     if (!dataParent.auth) {
@@ -18,18 +18,18 @@ export default async function CatalogLayout({
     }
     data = dataParent.catalog;
   } catch (e) {
-    redirect('/')
+    redirect("/");
   }
-
-
 
   return (
     <>
-      <Header />
-      <div className="catalog_container">
-        <Swiper data={data} />
-        {children}
+      <div className="cataRoot">
+        <Header />
+        <div className="catalog_container">
+          <Swiper data={data} />
+        </div>
       </div>
+      {children}
     </>
   );
 }
