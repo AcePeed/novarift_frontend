@@ -69,7 +69,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 4;
 }
 
 .title-detail-poster{
@@ -101,7 +100,7 @@
     top: calc(calc(100svh - var(--height)) / 2);
     left: calc(calc(100vw - var(--width)) / 2);
     right: calc(calc(100vw - var(--width)) / 2);*/
-    z-index: 4;
+    z-index: 10;
     margin-top: calc(calc(100svh - var(--height)) / 2);
     margin-bottom: calc(calc(100svh - var(--height)) / 2);
     overflow: hidden;
@@ -119,7 +118,7 @@
     bottom: calc(calc(100svh - var(--height)) / 2);
     left: calc(calc(100vw - var(--width)) / 2);
     right: calc(calc(100vw - var(--width)) / 2);
-    z-index: 4;
+    z-index: 10;
   }
 }
 

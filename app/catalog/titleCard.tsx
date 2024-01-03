@@ -21,7 +21,7 @@ export function Card(props : {name: string, img: string, id: string}){
     //<ImageAPI cookies='' src={process.env.API_HOST+props.img} draggable={false} alt={"Picture of "+props.name} />
     return <Link href={`/catalog/${props.id}`}>
         <div className="catalog_card">
-            <Image src={process.env.API_HOST+props.img+"?from=localhost"} draggable={false} width={1000} height={500} alt={"Picture of "+props.name} />
+            <Image priority src={process.env.API_HOST+props.img+"?from=localhost"} draggable={false} width={1000} height={500} alt={"Picture of "+props.name} />
             <span className='catalog_card_title'>{props.name}</span>
         </div>
     </Link>

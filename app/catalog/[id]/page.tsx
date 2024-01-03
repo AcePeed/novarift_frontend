@@ -7,7 +7,7 @@ import Veil from "./veil";
 export default async function TitlePage(props: { params: { id: string } }) {
   let title = await getTitle(props.params.id);
   if (!title.title) {
-    redirect('../')
+    redirect("../");
   } else {
     title = title.title;
   }
@@ -30,7 +30,6 @@ export default async function TitlePage(props: { params: { id: string } }) {
         </div>
       </div>
       <Veil />
-      
     </>
   );
 }
