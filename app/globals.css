@@ -5,6 +5,7 @@
 :root{
     --background : #111112;
     --backgroundClear : hsl(240, 3%, 13%);
+    --scrollBarColor : hsl(266, 30%, 26%);
     --accentColor: #8458B3;
     --clearColor: #A0D2EB;
     --fontColor: #ded7e3;
@@ -59,5 +60,5 @@ header{
 {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: hsl(266, 40%, 26%)
+	background-color: var(--scrollBarColor);
 }

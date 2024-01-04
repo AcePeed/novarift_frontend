@@ -24,7 +24,10 @@ export default async function TitlePage(props: { params: { id: string } }) {
             draggable={false}
           />
           <div className="title-detail">
-            <div className="title-detail-name">{title.name}</div>
+            <div className="title-detail-name-container">
+              <div className="title-detail-name">{title.name}</div>
+              <div className="title-detail-watch-button"><span>Watch</span><Image src="/images/play.png" priority alt="Play" width={200} height={200} /></div>
+            </div>
             <div className="title-detail-detail">{title.details}</div>
           </div>
         </div>

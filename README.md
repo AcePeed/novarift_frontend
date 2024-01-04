@@ -8,7 +8,7 @@ Second, copy the `.env.local.example` file to `.env.local` using the following c
 ```bash
 cp .env.local.example .env.local
 ```
-And change the environment variables according to your needs, to understand those variables, reffer to this [section](#environment-variables)
+And change the environment variables according to your needs, to understand those variables, reffer to this [section](#environment-variables).
 
 Third, run the development server:
 

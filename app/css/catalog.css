@@ -74,17 +74,53 @@
 .title-detail-poster{
   width: 100%;
   height: auto;
+  position: relative;
+  z-index: -1;
 }
-.title-detail{
-  width: 100%;
+.title-detail-name-container{
   display: flex;
-  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.title-detail-watch-button{
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 5px;
+  background-color: var(--accentColor);
+  padding: 5px;
   padding-left: 10px;
-  padding-bottom: 20px;
+  padding-right: 10px;
+  margin-right: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+}
+.title-detail-watch-button:hover{
+  filter: brightness(110%);
+  transform: scale(1.03);
+  box-shadow: 1px 2px 1px 1px rgba(0,0,0,0.5);
+}
+.title-detail-watch-button img{
+  filter: invert(100%);
+  width: 15px;
+  height: 15px;
+  margin-left: 7px;
 }
 .title-detail-name{
   margin-left: 10px;
   font-size: 30px;
+}
+
+.title-detail{
+  width: 100%;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-bottom: 20px;
 }
 
 
@@ -95,17 +131,14 @@
     width: var(--width);
     background-color: var(--backgroundClear);
     border-radius: 20px;
-    
-    /*position: relative;
-    top: calc(calc(100svh - var(--height)) / 2);
-    left: calc(calc(100vw - var(--width)) / 2);
-    right: calc(calc(100vw - var(--width)) / 2);*/
     z-index: 10;
     margin-top: calc(calc(100svh - var(--height)) / 2);
     margin-bottom: calc(calc(100svh - var(--height)) / 2);
     overflow: hidden;
   }
-
+  .title-detail{
+    box-shadow: 0 -20px 30px 25px var(--backgroundClear);
+  }
 }
 
 @media screen and (max-width: 799px) {
@@ -119,6 +152,23 @@
     left: calc(calc(100vw - var(--width)) / 2);
     right: calc(calc(100vw - var(--width)) / 2);
     z-index: 10;
+  }
+  .title-detail-veil{
+    background: var(--background);
+  }
+  .title-detail{
+    box-shadow: 0 -15px 40px 40px var(--background);
+  }
+}
+
+@media screen and (max-width: 799px){
+  .title-detail-name-container span{
+    display: block;
+  }
+  .title-detail-name-container{
+    flex-direction: column-reverse;
+    align-items: start;
+    justify-content: center;
   }
 }
 
