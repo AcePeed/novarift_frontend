@@ -2,7 +2,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+First, clone the following repository into another file and deploy it : [Novarift-back](https://github.com/AcePeed/novarift_backend)
+
+Second, copy the `.env.local.example` file to `.env.local` using the following commands : 
+```bash
+cp .env.local.example .env.local
+```
+And change the environment variables according to your needs, to understand those variables, reffer to this [section](#environment-variables)
+
+Third, run the development server:
 
 ```bash
 npm run dev
@@ -19,6 +27,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Environment Variables
+The `.env` files contains the following variables : 
+
+ - FRONT_HOST : (Optionnal) The url for your front-end
+ - API_HOST : (Required) The url for your backend/api from this app, example : 'localhost:3333'
+ - API_HOST_EXT : (Required) The url for your backend/api from an external person visiting the website, example : 'www.novarift.com/api'
 
 ## Learn More
 
