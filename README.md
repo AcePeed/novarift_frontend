@@ -1,8 +1,16 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
+First, make sure to clone this [repository](https://github.com/AcePeed/novarift_backend), and deploy it to use it as the API.
 
-First, run the development server:
+Second, copy `.env.local.example` to `.env.local` using the following command :
+```bash
+cp .env.local.example .env.local
+```
+And change the environment variables accordingly.
+
+
+Third, run the development server:
 
 ```bash
 npm run dev
