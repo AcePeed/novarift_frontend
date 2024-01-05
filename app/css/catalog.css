@@ -136,6 +136,31 @@
   padding-bottom: 20px;
 }
 
+.title-detail-detail{
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-detail-description{
+  width: 60%;
+}
+.title-detail-additional{
+  font-size: 0.9em;
+  margin-right: 40px;
+  width: 30%;
+}
+.title-detail-additional-producers span{
+  display: inline-block;
+}
+.title-detail-additional-producers span::before{
+  content: ', ';
+  margin-right: 2px;
+}
+.title-detail-additional-producers span:nth-child(1)::before{
+  content: '';
+  margin-left: 5px;
+}
+
 
 @media screen and (min-width: 800px) {
   .title-detail-container {
