@@ -7,7 +7,6 @@ export default function Veil(props: any) {
     <div
       className="title-detail-veil"
       onClick={() => {
-        console.log("Heeee");
         serverRedirect("/catalog", undefined);
       }}
     ></div>

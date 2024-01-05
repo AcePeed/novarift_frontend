@@ -37,18 +37,31 @@
   height: 100%;
 }
 .catalog_card_title {
-  display: inline-block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 30px;
   background-color: rgba(0, 0, 0, 0.5);
-  padding-top: 5px;
-  padding-bottom: 10px;
   padding-left: 10px;
   font-size: 1.3em;
   z-index: 2;
+}
+.catalog_card_icon_series{
+  width: 32px;
+  height: 32px;
+  filter: invert(100%);
+  margin-right: 10px;
+}
+.catalog_card_icon_movie{
+  width: 21px;
+  height: 21px;
+  filter: invert(100%);
+  margin-right: 15px;
 }
 
 .title-detail-veil {

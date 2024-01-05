@@ -10,7 +10,7 @@ export default async function CatalogLayout({
 }: {
   children: React.ReactNode;
 }) {
-  let data: Array<{ name: string; img: string; id: string }> = [];
+  let data: Array<{ name: string; img: string; id: string, is_movie: boolean }> = [];
   try {
     const dataParent = await getCatalog();
     if (!dataParent.auth) {
