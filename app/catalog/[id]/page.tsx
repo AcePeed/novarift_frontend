@@ -32,13 +32,13 @@ export default async function TitlePage(props: { params: { id: string } }) {
               <div className="title-detail-description">{title.details}</div>
               <div className="title-detail-additional">
                 <div className="title-detail-additional-producers">
-                  Producers : 
+                  <p>Producers : </p>
                   {title.producers.map((prod: string)=>{
                     return <span key={prod}>{prod}</span>
                   })}
                 </div>
                 <div className="title-detail-additional-maincast title-detail-additional-producers">
-                  Main Cast : 
+                  <p>Main Cast :</p> 
                   {title.main_cast.map((prod: string)=>{
                     return <span key={prod}>{prod}</span>
                   })}
