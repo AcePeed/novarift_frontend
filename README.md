@@ -33,7 +33,7 @@ The `.env` files contains the following variables :
 
  - FRONT_HOST : (Optionnal) The url for your front-end
  - API_HOST : (Required) The url for your backend/api from this app, example : 'localhost:3333'
- - API_HOST_EXT : (Required) The url for your backend/api from an external person visiting the website, example : 'www.novarift.com/api'
+ - API_HOST_EXT : (Required) The url for your backend/api from an external person visiting the website, example : `www.novarift.com/api`
 
 ## Learn More
 
