@@ -52,16 +52,16 @@
   z-index: 2;
 }
 .catalog_card_icon_series{
-  width: 32px;
-  height: 32px;
-  filter: invert(100%);
-  margin-right: 10px;
-}
-.catalog_card_icon_movie{
   width: 21px;
   height: 21px;
   filter: invert(100%);
   margin-right: 15px;
+}
+.catalog_card_icon_movie{
+  width: 30px;
+  height: 30px;
+  filter: invert(100%);
+  margin-right: 10px;
 }
 
 .title-detail-veil {
