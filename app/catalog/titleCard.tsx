@@ -1,6 +1,8 @@
 import Image from "next/image";
 import "../css/catalog.css";
 import { cookies } from "next/headers";
+import FilmIMG from '../../public/images/video.png'
+import VideoIMG from '../../public/images/film.png'
 import Link from "next/link";
 
 export function Swiper(props: {
@@ -37,7 +39,7 @@ export function Card(props: {
     <Link href={`/catalog/${props.id}`}>
       <div className="catalog_card">
         <Image
-          priority
+          //priority
           src={process.env.API_HOST + props.img + "?from=localhost"}
           draggable={false}
           width={1000}
@@ -47,10 +49,8 @@ export function Card(props: {
         <span className="catalog_card_title">
           <span>{props.name}</span> 
           <Image
-            src={props.is_movie ? "/images/film.png" : "/images/video.png"}
+            src={props.is_movie ? FilmIMG : VideoIMG}
             className={props.is_movie ? "catalog_card_icon_movie" : "catalog_card_icon_series"}
-            width={100}
-            height={100}
             alt="icon"
           />
         </span>
