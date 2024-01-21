@@ -24,8 +24,10 @@ export default function Player(props: { params: { id: string } }) {
   const progressRef = useRef(null);
   const clickedOnProgress = useRef(false);
   const noInteraction = useRef(null);
+  const VideoLayoutLoaded = useRef(false);
 
   const toggleVideo = () => {
+    console.log("toggle");
     setPlaying((oldV) => {
       let cur: { pause: Function; play: Function };
       cur = videoRef.current as unknown as { pause: Function; play: Function };
@@ -47,12 +49,21 @@ export default function Player(props: { params: { id: string } }) {
     if (!playing) {
       toggleVideo();
     }
+    else{
+      let cur = videoRef.current as unknown as { pause: Function; play: Function };
+      cur.pause();
+      cur.play();
+    }
   };
 
   const fullscreen = (e: any) => {
     e.preventDefault();
-    let elem = videoRef.current as unknown as any;
-    if (elem.requestFullscreen) {
+    let elem = document.getElementsByClassName(
+      "video-container"
+    )[0] as unknown as any;
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else if (elem.requestFullscreen) {
       elem.requestFullscreen();
     } else if (elem.webkitRequestFullscreen) {
       /* Safari */
@@ -72,12 +83,12 @@ export default function Player(props: { params: { id: string } }) {
     let video = videoRef.current as unknown as any;
     video.play().catch((e: any) => {
       console.log(e);
-      const noInterCurr = (noInteraction.current as unknown as any)
+      const noInterCurr = noInteraction.current as unknown as any;
       noInterCurr.style.display = "flex";
-      noInterCurr.addEventListener('click',(e:any)=>{
-        play()
-        noInterCurr.style.display='none'
-      })
+      noInterCurr.addEventListener("click", (e: any) => {
+        play();
+        noInterCurr.style.display = "none";
+      });
     });
 
     video.addEventListener("timeupdate", () => {
@@ -112,12 +123,15 @@ export default function Player(props: { params: { id: string } }) {
     });
     addEventListener("mouseup", (e): any => {
       removeEventListener("mousemove", mouseMove);
-      toggleVideo();
       clickedOnProgress.current = false;
     });
     const removeLoading = (e: any) => {
+      VideoLayoutLoaded.current = true
       setLoading(false);
     };
+    addEventListener('load',(e:any)=>{
+      VideoLayoutLoaded.current = true
+    })
     video.addEventListener("loadeddata", removeLoading);
     video.addEventListener("playing", removeLoading);
 
@@ -125,6 +139,7 @@ export default function Player(props: { params: { id: string } }) {
       setLoading(true);
     });
     video.addEventListener("canplay", (e: any) => {
+      VideoLayoutLoaded.current = true
       setLoading(false);
     });
 
@@ -135,16 +150,22 @@ export default function Player(props: { params: { id: string } }) {
         ward(-10);
       } else if (e.keyCode == 32) {
         toggleVideo();
+      } else if (e.keyCode == 70) {
+        fullscreen(e);
       }
       console.log(e.keyCode);
     };
 
     document.addEventListener("keydown", keyDownHandler);
 
+    const vidLoader = document.getElementsByClassName('video-loader')[0]
+    vidLoader.addEventListener("click", toggleVideo);
+
     return () => {
       document.removeEventListener("keydown", keyDownHandler);
       video.removeEventListener("loadeddata", removeLoading);
       video.removeEventListener("playing", removeLoading);
+      vidLoader.removeEventListener("click", toggleVideo);
     };
   }, []);
 
@@ -166,7 +187,7 @@ export default function Player(props: { params: { id: string } }) {
           autoPlay
           id="videoPlayer"
         ></video>
-        <div className="video-controls">
+        <div className="video-controls" style={VideoLayoutLoaded.current ? {display:'flex'} : {display:'none'}}>
           <FontAwesomeIcon
             className="video-play"
             icon={playing ? faPause : faPlay}
