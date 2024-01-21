@@ -27,21 +27,32 @@ export default async function TitlePage(props: { params: { id: string } }) {
           <div className="title-detail">
             <div className="title-detail-name-container">
               <div className="title-detail-name">{title.name}</div>
-              <Link href={title.watch}><div className="title-detail-watch-button"><span>Watch</span><Image src="/images/play.png" priority alt="Play" width={200} height={200} /></div></Link>
+              <Link href={"/watch/" + title.watch}>
+                <div className="title-detail-watch-button">
+                  <span>Watch</span>
+                  <Image
+                    src="/images/play.png"
+                    priority
+                    alt="Play"
+                    width={200}
+                    height={200}
+                  />
+                </div>
+              </Link>
             </div>
             <div className="title-detail-detail">
               <div className="title-detail-description">{title.details}</div>
               <div className="title-detail-additional">
                 <div className="title-detail-additional-producers">
                   <p>Producers : </p>
-                  {title.producers.map((prod: string)=>{
-                    return <span key={prod}>{prod}</span>
+                  {title.producers.map((prod: string) => {
+                    return <span key={prod}>{prod}</span>;
                   })}
                 </div>
                 <div className="title-detail-additional-maincast title-detail-additional-producers">
-                  <p>Main Cast :</p> 
-                  {title.main_cast.map((prod: string)=>{
-                    return <span key={prod}>{prod}</span>
+                  <p>Main Cast :</p>
+                  {title.main_cast.map((prod: string) => {
+                    return <span key={prod}>{prod}</span>;
                   })}
                 </div>
               </div>

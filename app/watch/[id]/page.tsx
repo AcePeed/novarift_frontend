@@ -48,9 +48,11 @@ export default function Player(props: { params: { id: string } }) {
   const play = () => {
     if (!playing) {
       toggleVideo();
-    }
-    else{
-      let cur = videoRef.current as unknown as { pause: Function; play: Function };
+    } else {
+      let cur = videoRef.current as unknown as {
+        pause: Function;
+        play: Function;
+      };
       cur.pause();
       cur.play();
     }
@@ -96,9 +98,11 @@ export default function Player(props: { params: { id: string } }) {
       if (video.ended) {
         setPlaying(false);
       }
-      (
-        document.querySelector(".video-inner") as unknown as any
-      ).style.width = `${curr}%`;
+      try {
+        (
+          document.querySelector(".video-inner") as unknown as any
+        ).style.width = `${curr}%`;
+      } catch (e) {}
     });
     let progressBar = progressRef.current as unknown as any;
 
@@ -126,12 +130,12 @@ export default function Player(props: { params: { id: string } }) {
       clickedOnProgress.current = false;
     });
     const removeLoading = (e: any) => {
-      VideoLayoutLoaded.current = true
+      VideoLayoutLoaded.current = true;
       setLoading(false);
     };
-    addEventListener('load',(e:any)=>{
-      VideoLayoutLoaded.current = true
-    })
+    addEventListener("load", (e: any) => {
+      VideoLayoutLoaded.current = true;
+    });
     video.addEventListener("loadeddata", removeLoading);
     video.addEventListener("playing", removeLoading);
 
@@ -139,7 +143,7 @@ export default function Player(props: { params: { id: string } }) {
       setLoading(true);
     });
     video.addEventListener("canplay", (e: any) => {
-      VideoLayoutLoaded.current = true
+      VideoLayoutLoaded.current = true;
       setLoading(false);
     });
 
@@ -158,7 +162,7 @@ export default function Player(props: { params: { id: string } }) {
 
     document.addEventListener("keydown", keyDownHandler);
 
-    const vidLoader = document.getElementsByClassName('video-loader')[0]
+    const vidLoader = document.getElementsByClassName("video-loader")[0];
     vidLoader.addEventListener("click", toggleVideo);
 
     return () => {
@@ -183,11 +187,18 @@ export default function Player(props: { params: { id: string } }) {
         </div>
         <video
           ref={videoRef}
-          src="/api/video/extend/Shazam/Shazam.Fury.Of.The.Gods.2023.1080p.WEBRip.x264.AAC5.1-[YTS.MX].mp4"
+          src={"/api/video/"+props.params.id}
           autoPlay
           id="videoPlayer"
         ></video>
-        <div className="video-controls" style={VideoLayoutLoaded.current ? {display:'flex'} : {display:'none'}}>
+        <div
+          className="video-controls"
+          style={
+            VideoLayoutLoaded.current
+              ? { display: "flex" }
+              : { display: "none" }
+          }
+        >
           <FontAwesomeIcon
             className="video-play"
             icon={playing ? faPause : faPlay}
