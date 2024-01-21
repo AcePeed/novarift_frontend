@@ -18,16 +18,16 @@ import Loading from "@/app/lib/loading";
 
 const getTimeFormat = (secs: number) => {
   let str = "";
-  str = `${Math.floor(secs)%60}`
-  if(Math.floor(secs)%60<10){
-    str = 0+str
+  str = `${Math.floor(secs) % 60}`;
+  if (Math.floor(secs) % 60 < 10) {
+    str = 0 + str;
   }
-  str = `${Math.floor(secs/60)%60}:`+str
-  if(Math.floor(secs/60)%60<10){
-    str = 0+str
+  str = `${Math.floor(secs / 60) % 60}:` + str;
+  if (Math.floor(secs / 60) % 60 < 10) {
+    str = 0 + str;
   }
-  if(secs/3600>=1){
-    str = `${Math.floor(secs/3600)}:`+str
+  if (secs / 3600 >= 1) {
+    str = `${Math.floor(secs / 3600)}:` + str;
   }
   return str;
 };
@@ -36,15 +36,15 @@ export default function Player(props: { params: { id: string } }) {
   const [volume, setVolume] = useState(60);
   const [playing, setPlaying] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [active, setActive] = useState(true);
   const videoRef = useRef(null);
   const progressRef = useRef(null);
   const clickedOnProgress = useRef(false);
   const noInteraction = useRef(null);
   const VideoLayoutLoaded = useRef(false);
-  const [Times, SetTimes] = useState([0,0])
+  const [Times, SetTimes] = useState([0, 0]);
 
   const toggleVideo = () => {
-    console.log("toggle");
     setPlaying((oldV) => {
       let cur: { pause: Function; play: Function };
       cur = videoRef.current as unknown as { pause: Function; play: Function };
@@ -101,7 +101,6 @@ export default function Player(props: { params: { id: string } }) {
   useEffect(() => {
     let video = videoRef.current as unknown as any;
     video.play().catch((e: any) => {
-      console.log(e);
       const noInterCurr = noInteraction.current as unknown as any;
       noInterCurr.style.display = "flex";
       noInterCurr.addEventListener("click", (e: any) => {
@@ -119,10 +118,12 @@ export default function Player(props: { params: { id: string } }) {
         (
           document.querySelector(".video-inner") as unknown as any
         ).style.width = `${curr}%`;
-        SetTimes([video.currentTime,video.duration])
+        SetTimes([video.currentTime, video.duration]);
       } catch (e) {}
     });
     let progressBar = progressRef.current as unknown as any;
+    var timeout: any;
+    const duration = 1500;
 
     const mouseMove = (e: any) => {
       let positionBar = progressBar.getBoundingClientRect();
@@ -138,6 +139,13 @@ export default function Player(props: { params: { id: string } }) {
       ).style.width = `${percent * 100}%`;
       video.currentTime = video.duration * percent;
     };
+    const activityHandler = (e:any)=>{
+      setActive(true);
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        setActive(false);
+      }, duration);
+    }
     progressBar.addEventListener("mousedown", (e: any) => {
       mouseMove(e);
       clickedOnProgress.current = true;
@@ -165,6 +173,9 @@ export default function Player(props: { params: { id: string } }) {
       setLoading(false);
     });
 
+
+    addEventListener("mousemove", activityHandler);
+
     const keyDownHandler = (e: any) => {
       if (e.keyCode == 39) {
         ward(+10);
@@ -188,6 +199,7 @@ export default function Player(props: { params: { id: string } }) {
       video.removeEventListener("loadeddata", removeLoading);
       video.removeEventListener("playing", removeLoading);
       vidLoader.removeEventListener("click", toggleVideo);
+      removeEventListener("mousemove", activityHandler);
     };
   }, []);
 
@@ -211,11 +223,7 @@ export default function Player(props: { params: { id: string } }) {
         ></video>
         <div
           className="video-controls"
-          style={
-            VideoLayoutLoaded.current
-              ? { display: "flex" }
-              : { display: "none" }
-          }
+          style={{ display: VideoLayoutLoaded.current ? "flex" : "none", opacity: (!playing || active) ? 1 : 0 }}
         >
           <div className="video-controls-button-container">
             <FontAwesomeIcon
