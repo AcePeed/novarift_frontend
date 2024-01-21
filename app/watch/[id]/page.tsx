@@ -16,6 +16,22 @@ import "./player.css";
 import { useEffect, useRef, useState } from "react";
 import Loading from "@/app/lib/loading";
 
+const getTimeFormat = (secs: number) => {
+  let str = "";
+  str = `${Math.floor(secs)%60}`
+  if(Math.floor(secs)%60<10){
+    str = 0+str
+  }
+  str = `${Math.floor(secs/60)%60}:`+str
+  if(Math.floor(secs/60)%60<10){
+    str = 0+str
+  }
+  if(secs/3600>=1){
+    str = `${Math.floor(secs/3600)}:`+str
+  }
+  return str;
+};
+
 export default function Player(props: { params: { id: string } }) {
   const [volume, setVolume] = useState(60);
   const [playing, setPlaying] = useState(true);
@@ -25,6 +41,7 @@ export default function Player(props: { params: { id: string } }) {
   const clickedOnProgress = useRef(false);
   const noInteraction = useRef(null);
   const VideoLayoutLoaded = useRef(false);
+  const [Times, SetTimes] = useState([0,0])
 
   const toggleVideo = () => {
     console.log("toggle");
@@ -102,6 +119,7 @@ export default function Player(props: { params: { id: string } }) {
         (
           document.querySelector(".video-inner") as unknown as any
         ).style.width = `${curr}%`;
+        SetTimes([video.currentTime,video.duration])
       } catch (e) {}
     });
     let progressBar = progressRef.current as unknown as any;
@@ -187,7 +205,7 @@ export default function Player(props: { params: { id: string } }) {
         </div>
         <video
           ref={videoRef}
-          src={"/api/video/"+props.params.id}
+          src={"/api/video/" + props.params.id}
           autoPlay
           id="videoPlayer"
         ></video>
@@ -199,41 +217,46 @@ export default function Player(props: { params: { id: string } }) {
               : { display: "none" }
           }
         >
-          <FontAwesomeIcon
-            className="video-play"
-            icon={playing ? faPause : faPlay}
-            onClick={toggleVideo}
-          />
-          <FontAwesomeIcon
-            onClick={() => {
-              ward(-10);
-            }}
-            className="video-backward"
-            icon={faBackward}
-          />
-          <FontAwesomeIcon
-            onClick={() => {
-              ward(+10);
-            }}
-            className="video-forward"
-            icon={faForward}
-          />
-          <FontAwesomeIcon
-            icon={
-              volume > 50
-                ? faVolumeHigh
-                : volume > 0
-                ? faVolumeLow
-                : faVolumeMute
-            }
-          />
+          <div className="video-controls-button-container">
+            <FontAwesomeIcon
+              className="video-play"
+              icon={playing ? faPause : faPlay}
+              onClick={toggleVideo}
+            />
+            <FontAwesomeIcon
+              onClick={() => {
+                ward(-10);
+              }}
+              className="video-backward"
+              icon={faBackward}
+            />
+            <FontAwesomeIcon
+              onClick={() => {
+                ward(+10);
+              }}
+              className="video-forward"
+              icon={faForward}
+            />
+            <FontAwesomeIcon
+              icon={
+                volume > 50
+                  ? faVolumeHigh
+                  : volume > 0
+                  ? faVolumeLow
+                  : faVolumeMute
+              }
+            />
+            <div className="video-title">Shaz3aam</div>
+            <FontAwesomeIcon icon={faClosedCaptioning} />
+            <FontAwesomeIcon onClick={fullscreen} icon={faExpand} />
+          </div>
           <div draggable={false} className="video-timeline" ref={progressRef}>
+            <div className="video-time">{getTimeFormat(Times[0])}</div>
             <div className="video-bar">
               <div className="video-inner"></div>
             </div>
+            <div className="video-end">{getTimeFormat(Times[1])}</div>
           </div>
-          <FontAwesomeIcon icon={faClosedCaptioning} />
-          <FontAwesomeIcon onClick={fullscreen} icon={faExpand} />
         </div>
       </div>
     </div>
